@@ -1,4 +1,4 @@
-/* =========================
+        /* =========================
    DESIGN SYSTEM VARIABLES
 ========================= */
 
@@ -11,12 +11,17 @@
     --danger: #dc2626;
     --border: #e5e7eb;
 
-    --radius: 14px;
-    --shadow: 0 8px 25px rgba(0,0,0,0.06);
+    --radius: 16px;
+    --shadow: 0 10px 30px rgba(0,0,0,0.08);
     --transition: 0.2s ease;
+
+    /* Typography Scale */
+    --font-base: clamp(18px, 4vw, 22px);
+    --font-large: clamp(24px, 5vw, 32px);
+    --font-small: clamp(16px, 3.5vw, 18px);
 }
 
-/* DARK MODE VARIABLES */
+/* DARK MODE */
 body.dark {
     --bg: #0f172a;
     --card-bg: #1e293b;
@@ -38,22 +43,18 @@ body.dark {
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 
+    font-family: -apple-system, BlinkMacSystemFont,
                  "Segoe UI", Roboto, sans-serif;
     background: var(--bg);
     color: var(--text);
-    padding: 20px;
+    padding: 24px;
+    max-width: 900px;
+    margin: 0 auto;
     transition: background var(--transition),
                 color var(--transition);
-}
 
-/* =========================
-   LAYOUT CONTAINER
-========================= */
-
-body {
-    max-width: 800px;
-    margin: 0 auto;
+    font-size: var(--font-base);
+    line-height: 1.6;
 }
 
 /* =========================
@@ -64,36 +65,32 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 16px;
 }
 
 nav a {
     text-decoration: none;
-    font-weight: 600;
+    font-weight: 700;
+    font-size: var(--font-small);
     color: var(--primary);
-    padding: 8px 12px;
-    border-radius: 8px;
+    padding: 10px 14px;
+    border-radius: 10px;
     transition: background var(--transition);
 }
 
 nav a:hover {
-    background: rgba(37,99,235,0.1);
+    background: rgba(37,99,235,0.12);
 }
 
-/* Dark mode button */
 nav button {
-    background: var(--card-bg);
+    font-size: var(--font-small);
+    padding: 8px 12px;
+    border-radius: 10px;
     border: 1px solid var(--border);
-    padding: 6px 10px;
-    border-radius: 8px;
+    background: var(--card-bg);
     cursor: pointer;
-    transition: var(--transition);
-}
-
-nav button:hover {
-    transform: scale(1.05);
 }
 
 /* =========================
@@ -101,9 +98,9 @@ nav button:hover {
 ========================= */
 
 h1 {
-    font-size: 1.8rem;
-    margin-bottom: 20px;
-    font-weight: 700;
+    font-size: var(--font-large);
+    font-weight: 800;
+    margin-bottom: 25px;
 }
 
 /* =========================
@@ -113,20 +110,20 @@ h1 {
 input[type="text"],
 input[type="datetime-local"] {
     width: 100%;
-    padding: 12px;
-    margin-bottom: 12px;
+    padding: 16px;
+    margin-bottom: 18px;
     border-radius: var(--radius);
     border: 1px solid var(--border);
     background: var(--card-bg);
     color: var(--text);
-    font-size: 1rem;
+    font-size: var(--font-base);
     transition: var(--transition);
 }
 
 input:focus {
     outline: none;
     border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(37,99,235,0.2);
+    box-shadow: 0 0 0 4px rgba(37,99,235,0.25);
 }
 
 /* =========================
@@ -134,11 +131,12 @@ input:focus {
 ========================= */
 
 button {
-    padding: 10px 14px;
-    border-radius: 10px;
+    padding: 14px 18px;
+    border-radius: 14px;
     border: none;
     cursor: pointer;
-    font-weight: 600;
+    font-weight: 700;
+    font-size: var(--font-small);
     transition: var(--transition);
 }
 
@@ -147,22 +145,19 @@ button:hover {
 }
 
 button:active {
-    transform: scale(0.98);
+    transform: scale(0.97);
 }
 
-/* Primary button (Add Task) */
 button:not(.danger):not(.edit) {
     background: var(--primary);
     color: white;
 }
 
-/* Edit button */
 button.edit {
     background: #facc15;
     color: black;
 }
 
-/* Delete button */
 button.danger {
     background: var(--danger);
     color: white;
@@ -177,72 +172,64 @@ ul {
     padding: 0;
 }
 
-/* Card style task item */
 li {
     background: var(--card-bg);
-    padding: 15px;
+    padding: 20px;
     border-radius: var(--radius);
-    margin-bottom: 12px;
+    margin-bottom: 18px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     box-shadow: var(--shadow);
     border: 1px solid var(--border);
     transition: var(--transition);
+    gap: 20px;
 }
 
 li:hover {
-    transform: translateY(-2px);
+    transform: translateY(-3px);
 }
 
-/* Task left section */
 li span {
     flex: 1;
-    margin-left: 10px;
-    font-size: 0.95rem;
+    margin-left: 14px;
+    font-size: var(--font-base);
 }
 
-/* Completed styling */
 .completed {
     text-decoration: line-through;
     color: var(--muted);
 }
 
-/* Button group inside task */
 li div {
     display: flex;
-    gap: 8px;
+    gap: 12px;
 }
 
-/* Checkbox */
 input[type="checkbox"] {
-    transform: scale(1.2);
+    transform: scale(1.6);
     cursor: pointer;
 }
 
 /* =========================
-   RESPONSIVE DESIGN
+   MOBILE OPTIMIZATION
 ========================= */
 
 @media (max-width: 600px) {
 
     body {
-        padding: 15px;
+        padding: 20px;
     }
 
     nav {
         flex-direction: column;
         align-items: flex-start;
-    }
-
-    nav a {
-        padding: 6px 0;
+        gap: 12px;
     }
 
     li {
         flex-direction: column;
         align-items: flex-start;
-        gap: 10px;
     }
 
     li div {
@@ -251,12 +238,12 @@ input[type="checkbox"] {
     }
 
     button {
-        width: auto;
+        width: 100%;
     }
 }
 
 /* =========================
-   MICRO-INTERACTIONS
+   MICRO-ANIMATION
 ========================= */
 
 li {
