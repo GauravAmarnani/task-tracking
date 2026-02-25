@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Task</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav>
+    <a href="index.html">Home</a>
+    <a href="add.html">Add Task</a>
+    <a href="finished.html">Finished</a>
+    <button onclick="toggleDarkMode()">🌙</button>
+</nav>
+
+<h1>Add New Task</h1>
+
+<input type="text" id="taskInput" placeholder="Enter task">
+<input type="datetime-local" id="dueTime">
+<button onclick="handleAdd()">Add Task</button>
+
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script src="taskManager.js"></script>
+<script src="notifications.js"></script>
+<script src="ui.js"></script>
+
+<script>
+    // 🔐 Replace these with your EmailJS credentials
+    const EMAIL_SERVICE_ID = "YOUR_SERVICE_ID";
+    const EMAIL_TEMPLATE_ID = "YOUR_TEMPLATE_ID";
+    const EMAIL_PUBLIC_KEY = "YOUR_PUBLIC_KEY";
+
+    emailjs.init(EMAIL_PUBLIC_KEY);
+
+    initDarkMode();
+
+    function handleAdd() {
+        const text = document.getElementById("taskInput").value.trim();
+        const due = document.getElementById("dueTime").value;
+
+        if (!text) return alert("Task cannot be empty");
+
+        const task = taskManager.addTask(text, due);
+
+        if (due) {
+            scheduleReminders(task, EMAIL_SERVICE_ID, EMAIL_TEMPLATE_ID, EMAIL_PUBLIC_KEY);
+        }
+
+        document.getElementById("taskInput").value = "";
+        document.getElementById("dueTime").value = "";
+
+        alert("Task added!");
+    }
+</script>
+
+</body>
+</html>
